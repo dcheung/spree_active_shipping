@@ -9,6 +9,7 @@ module Spree
         }
 
         def compute_package(package)
+          logger.info "package : #{package.inspect}"
           order = package.order
           stock_location = package.stock_location
 
@@ -33,7 +34,7 @@ module Spree
             :login => Spree::ActiveShipping::Config[:usps_login],
             :test => Spree::ActiveShipping::Config[:test_mode]
           }
-
+          logger.info "package : #{carrier_details.inspect}"
           ::ActiveShipping::USPS.new(carrier_details)
         end
 
@@ -42,7 +43,7 @@ module Spree
         def retrieve_rates(origin, destination, shipment_packages)
           begin
             response = carrier.find_rates(origin, destination, shipment_packages, rate_options)
-            logger.info "active shipping response : #{response.inspec}"
+            logger.info "active shipping response : #{response.inspect}"
             # turn this beastly array into a nice little hash
             service_code_prefix_key = response.params.keys.first == 'IntlRateV2Response' ? :international : :domestic
             rates = response.rates.collect do |rate|
