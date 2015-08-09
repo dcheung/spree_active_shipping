@@ -5,6 +5,7 @@ Spree::CheckoutController.class_eval do
 
   private
     def handle_shipping_error(e)
+      logger.error " handling shipping error : #{e}"
       flash[:error] = e.message
       redirect_to checkout_state_path(:address)
     end
