@@ -1,5 +1,4 @@
 require_dependency 'spree/calculator'
-require 'active_shipping'
 
 module Spree
   module Calculator::Shipping
@@ -14,7 +13,7 @@ module Spree
             :test => Spree::ActiveShipping::Config[:test_mode]
           }
 
-          ActiveShipping::FedEx.new(carrier_details)
+          ::ActiveShipping::FedEx.new(carrier_details)
         end
       end
     end
