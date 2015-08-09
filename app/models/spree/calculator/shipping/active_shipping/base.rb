@@ -2,6 +2,7 @@
 # instantiated directly.  Create subclass for each specific shipping method you wish to support instead.
 #
 # Digest::MD5 is used for cache_key generation.
+require 'active_shipping'
 require 'digest/md5'
 require_dependency 'spree/calculator'
 
